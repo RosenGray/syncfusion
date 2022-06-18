@@ -1,4 +1,5 @@
 import React from 'react';
+import { useStateContext } from '../context/ContextProvider';
 import { Link, NavLink } from 'react-router-dom';
 import { SiShopware } from 'react-icons/si';
 import { MdOutlineCancel } from 'react-icons/md';
@@ -8,7 +9,8 @@ import { links } from '../data/dummy';
 
 console.log('links', links);
 const SideBar = () => {
-  const activeMenu = true;
+  const { activeMenu, setActiveMenu } = useStateContext();
+
   const activeLink =
     'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-black text-md m-2';
   const normalLink =
@@ -47,15 +49,13 @@ const SideBar = () => {
             <Link
               className="flex items-center gap-3 ml-3 mt-4 text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
               to="/"
-              onClick={() => {
-                alert(123);
-              }}
+              onClick={() => setActiveMenu(false)}
             >
               <SiShopware /> <span>Shoppy</span>
             </Link>
             <TooltipComponent position="BottomCenter" content="Menu">
               <button
-                onClick={() => {}}
+                onClick={() => setActiveMenu((p) => !p)}
                 className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden"
                 type="button"
               >
